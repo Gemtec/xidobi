@@ -44,7 +44,7 @@
 		* eclipse.repository - which eclipse repository should used for solving dependencies (ex. junit-test/surfire) 
 	 -->
 	<properties>
-		<tycho.version>0.16.0</tycho.version>
+		<tycho.version>0.20.0</tycho.version>
 		<tycho.group>org.eclipse.tycho</tycho.group>
 		<eclipse.repository>http://download.eclipse.org/releases/juno/</eclipse.repository>
 	</properties>
