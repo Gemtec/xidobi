@@ -145,7 +145,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>0.16.0</version>
+				<version>${tycho.version}</version>
 				<configuration>
 					<showEclipseLog>true</showEclipseLog>
 					<failIfNoTests>false</failIfNoTests>
