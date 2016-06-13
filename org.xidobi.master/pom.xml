@@ -31,10 +31,10 @@
 
 	<!-- project information -->
 	<issueManagement>
-		<url>https://code.google.com/p/xidobi/issues/list</url>
+		<url>https://github.com/Gemtec/xidobi/issues</url>
 	</issueManagement>
 	<name>Xidobi</name>
-	<url>https://code.google.com/p/xidobi/</url>
+	<url>https://github.com/Gemtec/xidobi</url>
 	<description>xidobi is a library for serial communication in Java 1.5+. It's released under the Apache 2.0 License, so it can be used and modified in open source and commercial projects. </description>
 
 	<!--
@@ -47,6 +47,7 @@
 		<tycho.version>0.20.0</tycho.version>
 		<tycho.group>org.eclipse.tycho</tycho.group>
 		<eclipse.repository>http://download.eclipse.org/releases/juno/</eclipse.repository>
+		<xidobi.dependencies>http://dl.bintray.com/kdoteu/Xidobi.Dependencies</xidobi.dependencies>
 	</properties>
 
 	<!-- module list -->
@@ -67,6 +68,11 @@
 			<id>eclipse repository</id>
 			<layout>p2</layout>
 			<url>${eclipse.repository}</url>
+		</repository>
+		<repository>
+			<id>xidobi dependencies</id>
+			<layout>p2</layout>
+			<url>${xidobi.dependencies}</url>
 		</repository>
 	</repositories>
 
@@ -122,14 +128,6 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<target>
-						<artifact>
-							<groupId>org.xidobi</groupId>
-							<artifactId>xidobi</artifactId>
-							<version>0.0.1-SNAPSHOT</version>
-							<classifier>xidobi</classifier>
-						</artifact>
-					</target>
 					<environments>
 						<environment>
 							<os>win32</os>
