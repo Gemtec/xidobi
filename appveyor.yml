@@ -1,0 +1,31 @@
+version: '{build}'
+skip_tags: true
+clone_depth: 10
+environment:
+  matrix:
+    - JAVA_HOME: C:\Program Files (x86)\Java\jdk1.7.0
+platform: x86
+branches:
+  except:
+    - gh-pages
+os: Windows Server 2012
+install:
+  - ps: |
+      Add-Type -AssemblyName System.IO.Compression.FileSystem
+      if (!(Test-Path -Path "C:\maven" )) {
+        (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.zip', 'C:\maven-bin.zip')
+        [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
+      }
+  - cmd: C:\cygwin\setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P autoconf -P automake -P bison -P gcc-core -P gcc-g++ -P mingw-runtime -P mingw-binutils -P mingw-gcc-core -P mingw-gcc-g++ -P mingw-pthreads -P mingw-w32api -P libtool -P make -P python -P gettext-devel -P gettext -P intltool -P libiconv -P pkg-config -P git -P wget -P curl -P gcc
+  - cmd: SET PATH=C:\cygwin\bin;C:\maven\apache-maven-3.2.5\bin;%JAVA_HOME%\bin;%PATH:C:\Ruby193\bin;=%
+#  - cmd: SET MAVEN_OPTS=-XX:MaxPermSize=2g -Xmx3g
+#  - cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx3g
+  - cmd: mvn --version
+  - cmd: java -version
+build_script:
+  - mvn -f org.xidobi.master clean package -X -B -Dmaven.test.skip=true -Dosgi.arch=x86
+test_script:
+  - mvn -f org.xidobi.master clean verify -X -Dosgi.arch=x86
+cache:
+  - C:\maven\
+  - C:\Users\appveyor\.m2

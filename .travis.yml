@@ -1,7 +1,21 @@
 language: java
-script: mvn -f org.xidobi.master clean verify
+script: mvn -f org.xidobi.master clean verify -U -DcCompilerExecutable=i686-w64-mingw32-gcc
 notifications:
   # Email notifications are disabled to not annoy anybody.
   # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
   # about configuring notification recipients and more.
   email: false
+   
+before_script:
+  - sudo add-apt-repository --yes ppa:tobydox/mingw-x-precise
+  - sudo apt-get update -qq
+  - sudo apt-get install -y zip cloog-isl mingw32
+  - sudo apt-get install -y mingw32-x-binutils mingw32-x-gcc mingw32-x-runtime mingw32-x-qt5base  
+  - export PLATFORM=mingw32 
+  - export ARCH=x86
+  - export MINGW=/opt/mingw32
+  - export PATH=$MINGW/bin:$PATH
+  - export CC=i686-w64-mingw32-gcc
+  - export CXX=i686-w64-mingw32-g++
+  - gcc -v
+  - i686-w64-mingw32-gcc -v
